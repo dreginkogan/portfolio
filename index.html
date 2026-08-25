@@ -1,54 +1,20 @@
+<!-- TODO: fill in content for projects, make projects into its own file just like how photos is
+ find icons for all my skill categories, write the skills, link everything that needs to be linked
+ and find a presentable photo of myself to put onto the top of the page 
+ 
+ Also, does it make sense to split mechanical and software? since a lot of my projects involve both, though
+ I primarily focus on mechanical work (CAD, fabrication, etc)-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Landing Page</title>
+    <!-- External Theme & Color Configuration -->
+    <link rel="stylesheet" href="theme.css">
     <style>
-        /* ==========================================
-           THEME & COLOR CONFIGURATION (Light/Dark)
-           ========================================== */
-        :root {
-            --bg-color-top: #0f172a;          /* Hero fallback color */
-            --bg-color-scroll: #f8fafc;       /* General background / card tint */
-            --white-block-bg: #ffffff;        /* Main content block background */
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-light: #ffffff;
-            --accent-color: #2563eb;          /* Theme accent & active link color */
-            --border-color: #e2e8f0;
-            --border-radius: 12px;
-            --content-width: 1000px;          /* Centered content width */
-            --transition-speed: 0.3s ease;
-            
-            /* Light Mode Parallax Background Photo */
-            --parallax-bg: none;              /* Replace with: url('images/light-hero-photo.jpg') */
-            
-            /* Light Mode Scrolled Nav Colors (High Contrast) */
-            --nav-scrolled-bg: #ffffff;       /* Solid white */
-            --nav-text-color: #ffffff;        /* White text over hero photo */
-            --nav-scrolled-text: #000000;     /* Pure black text when scrolled in light mode */
-            --nav-link-opacity: 1;
-        }
-
-        /* Dark Mode Color Overrides & Dark Mode Parallax Photo */
-        body.dark-mode {
-            --bg-color-scroll: #0b0f19;
-            --white-block-bg: #111827;
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --border-color: #1f2937;
-            
-            /* Dark Mode Parallax Background Photo */
-            --parallax-bg: none;              /* Replace with: url('images/dark-hero-photo.jpg') */
-            
-            /* Dark Mode Scrolled Nav Colors (High Contrast) */
-            --nav-scrolled-bg: #000000;       /* Solid black */
-            --nav-text-color: #ffffff;
-            --nav-scrolled-text: #ffffff;     /* Pure white text when scrolled in dark mode */
-        }
-
-        /* Enable smooth scrolling for anchor links */
+        /* Enable smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
@@ -69,55 +35,24 @@
         }
 
         /* ==========================================
-           COLLAPSIBLE STICKY HERO & HORIZONTAL NAV
+           PERSISTENT STICKY TOP BAR (NAVIGATION)
            ========================================== */
-        .hero-header {
+        .sticky-nav {
             position: sticky;
             top: 0;
             width: 100%;
-            height: 480px;                    /* Full height at top of page */
+            height: 70px;
             background-color: var(--bg-color-top);
-            background-image: var(--parallax-bg);
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            overflow: hidden;
             z-index: 1000;
-            transition: height var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        /* Dark overlay for photo background contrast */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color-top);
-            opacity: 0.88;
-            z-index: 1;
-            transition: opacity var(--transition-speed);
-        }
-
-        body.dark-mode .hero-overlay {
-            opacity: 0.92;
-        }
-
-        /* Shrink state when scrolled */
-        .hero-header.scrolled {
-            height: 70px;                     /* Slim sticky bar height */
-            background-color: var(--nav-scrolled-bg);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: none;
+            transition: background-color var(--transition-speed);
         }
 
         /* Navigation Container */
         .nav-container {
-            position: relative;
-            z-index: 3;
             max-width: var(--content-width);
             margin: 0 auto;
-            height: 70px;
+            height: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -150,7 +85,7 @@
             text-decoration: none;
             font-weight: 400;
             font-size: 0.92rem;
-            opacity: 0.85;
+            opacity: var(--nav-link-opacity);
             transition: opacity var(--transition-speed), color var(--transition-speed), font-weight var(--transition-speed);
         }
 
@@ -164,19 +99,6 @@
             opacity: 1;
             color: var(--accent-color);
             font-weight: 600;
-        }
-
-        /* When scrolled, shift nav text to high-contrast color */
-        .hero-header.scrolled .nav-brand,
-        .hero-header.scrolled .horizontal-nav a {
-            color: var(--nav-scrolled-text);
-            opacity: 1;
-        }
-
-        .hero-header.scrolled .horizontal-nav a:hover,
-        .hero-header.scrolled .horizontal-nav a.active {
-            opacity: 1;
-            color: var(--accent-color);
         }
 
         /* Dark/Light Mode Toggle Button */
@@ -204,39 +126,32 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Hero Content (Headshot, Name, Subtitle) */
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: var(--content-width);
-            margin: 0 auto;
-            height: calc(100% - 70px);
+        /* ==========================================
+           HERO SECTION (Page Content with Headshot)
+           ========================================== */
+        .hero-section {
+            background-color: var(--bg-color-top);
+            color: var(--text-light);
+            padding: 70px 20px 90px 20px;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 0 20px 40px 20px;
-            transition: opacity 0.2s ease, transform var(--transition-speed);
-        }
-
-        /* Fades out and slides up when header shrinks */
-        .hero-header.scrolled .hero-content {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-20px);
+            transition: background-color var(--transition-speed);
+            scroll-margin-top: 70px;
         }
 
         /* Headshot Photo */
         .photo-container {
-            width: 140px;
-            height: 140px;
+            width: 260px;
+            height: 260px;
             border-radius: 50%;
             overflow: hidden;
             background-color: var(--border-color);
             border: 4px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -249,21 +164,21 @@
         }
 
         .photo-placeholder-text {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--text-light);
             opacity: 0.7;
             text-align: center;
             padding: 10px;
         }
 
-        .hero-content h1 {
-            font-size: 2.4rem;
+        .hero-section h1 {
+            font-size: 2.6rem;
             font-weight: 700;
             color: var(--text-light);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .hero-content .subtitle {
+        .hero-section .subtitle {
             font-size: 1.15rem;
             color: var(--text-light);
             opacity: 0.85;
@@ -292,8 +207,14 @@
         /* Centered and Larger Portfolio Sections */
         .portfolio-section {
             margin-bottom: 90px;
-            scroll-margin-top: 100px; /* Accounts for sticky header height */
+            scroll-margin-top: 100px;         /* Accounts for sticky nav height (70px) + spacing */
             text-align: center;
+        }
+
+        /* Extra breathing room specifically above Technical Expertise & Tools */
+        #skills {
+            margin-top: 30px;
+            scroll-margin-top: 120px;
         }
 
         .portfolio-section h2 {
@@ -368,39 +289,218 @@
         }
 
         /* Centered & Larger Project Cards */
+        /* Expandable Project Cards */
         .project-card {
             background-color: var(--bg-color-scroll);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 24px 30px;
             margin-bottom: 20px;
-            text-align: center;
+            text-align: left;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             transition: border-color var(--transition-speed), background-color var(--transition-speed);
+            cursor: pointer;
         }
 
         .project-card:hover {
             border-color: var(--accent-color);
         }
 
-        .project-card h3 {
+        .project-summary {
+            list-style: none; /* Hide default browser arrow */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        /* Hide default arrow for Safari/Chrome */
+        .project-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .project-summary h3 {
             font-size: 1.35rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--text-primary);
         }
 
-        .project-card p {
+        .project-summary p {
             font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Optional indicator arrow that rotates when open */
+        .expand-arrow {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+            margin-top: 4px;
+            user-select: none;
+        }
+
+        .project-card[open] .expand-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Expanded Content Layout */
+        .project-details-content {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            cursor: default;
+        }
+
+        .project-section-block {
+            margin-bottom: 16px;
+        }
+
+        .project-section-block h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-color);
+            margin-bottom: 6px;
+        }
+
+        .project-section-block p {
+            font-size: 1rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
+        /* Project Photos Grid inside expanded card */
+        .project-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .project-photo-grid img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 600px) {
+            .project-photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==========================================
+           PHOTOGRAPHY SECTION STYLES (3:2 Film Proportions)
+           ========================================== */
+        .photo-blurb {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto 36px auto;
+            line-height: 1.6;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background-color: var(--bg-color-scroll);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 4px; /* 4px margin/padding inside the card border */
+            transition: border-color 0.2s ease, background-color var(--transition-speed);
+        }
+
+        .photo-card:hover {
+            border-color: var(--accent-color); /* Changes border to accent color on hover */
+        }
+
+        .photo-card img {
+            width: 100%;
+            aspect-ratio: 3 / 2; /* Matches standard landscape 35mm film frame proportions */
+            object-fit: cover;
+            background-color: var(--bg-color-scroll);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-radius: 8px;
+        }
+
+        /* ==========================================
+           LIGHTBOX MODAL STYLES
+           ========================================== */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            padding: 20px;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-caption {
+            margin-top: 16px;
+            color: #ffffff;
+            font-family: sans-serif;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            text-align: center;
+            max-width: 700px;
+        }
+
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
         /* Responsive Design */
         @media (max-width: 900px) {
-            .skills-grid {
+            .skills-grid, .photo-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .horizontal-nav {
@@ -413,7 +513,7 @@
         }
 
         @media (max-width: 600px) {
-            .skills-grid {
+            .skills-grid, .photo-grid {
                 grid-template-columns: 1fr;
             }
             .horizontal-nav {
@@ -422,45 +522,52 @@
         }
     </style>
 </head>
-<body id="about">
+<body class="dark-mode">
 
-    <!-- Collapsible Sticky Hero Header with Horizontal Navigation -->
-    <header id="heroHeader" class="hero-header">
-        <div class="hero-overlay"></div>
-        
-        <!-- Navigation Bar -->
+    <!-- Persistent Sticky Top Navigation Bar -->
+    <header class="sticky-nav">
         <div class="nav-container">
-            <a href="#about" class="nav-link nav-brand">Your Name</a>
+            <a href="#about" class="nav-link nav-brand">Danya Kogan</a>
             <div class="nav-right-group">
                 <nav>
                     <ul class="horizontal-nav">
-                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#about" class="nav-link active">About</a></li>
                         <li><a href="#skills" class="nav-link">Skills</a></li>
                         <li><a href="#mechanical" class="nav-link">Mechanical</a></li>
                         <li><a href="#software" class="nav-link">Software</a></li>
                         <li><a href="#photography" class="nav-link">Photography</a></li>
                     </ul>
                 </nav>
-                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">🌙</button>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">☀️</button>
             </div>
-        </div>
-
-        <!-- Full-Height Hero Content (Headshot, Name, Subtitle) -->
-        <div class="hero-content">
-            <div class="photo-container">
-                <!-- Swap out for <img> later: <img src="images/your-photo.jpg" alt="Your Name"> -->
-                <div class="photo-placeholder-text">Photo Placeholder</div>
-            </div>
-            <h1>Your Name</h1>
-            <p class="subtitle">Mechanical Engineering &amp; Robotics Student | Field Robotics &amp; Additive Manufacturing</p>
         </div>
     </header>
+
+    <!-- Hero Section (Page Content with Headshot) -->
+    <section id="about" class="hero-section">
+        <div class="photo-container">
+            <div class="photo-placeholder-text">Photo Placeholder</div>
+        </div>
+        <h1>Danya Kogan</h1>
+        <p class="subtitle">Senior Mechanical Engineering, Robotics, &amp; Anthropology <br>Student @ Carnegie Mellon University</p>
+        
+        <!-- Social Links & Resume Button Row -->
+        <div class="hero-links" style="margin-top: 20px; display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">LinkedIn</a>
+            <span style="opacity: 0.4;">•</span>
+            <a href="https://github.com/yourusername" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">GitHub</a>
+            <span style="opacity: 0.4;">•</span>
+            <a href="mailto:your.email@domain.com" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">Email</a>
+            <span style="opacity: 0.4;">•</span>
+            <a href="resume.pdf" target="_blank" style="background-color: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Download Resume</a>
+        </div>
+    </section>
 
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
         <main class="content-area">
             
-            <!-- Skills Section (3-Wide Grid, 3 Rows, Circular Logos, No Card Background) -->
+            <!-- Skills Section -->
             <section id="skills" class="portfolio-section">
                 <h2>Technical Expertise &amp; Tools</h2>
                 
@@ -553,14 +660,62 @@
             <!-- Mechanical Projects Section -->
             <section id="mechanical" class="portfolio-section">
                 <h2>Mechanical Projects</h2>
-                <div class="project-card">
-                    <h3>Rover Sensor Mast Design</h3>
-                    <p>Designed, simulated, and fabricated a custom sensor mast for field robotics testing, incorporating weight-saving topology and rigorous FEA validation.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Cycloidal Gearbox</h3>
-                    <p>Engineered a compact high-ratio reduction gearbox for quadruped locomotion joints, precision-machined in the machine shop.</p>
-                </div>
+                
+                <details class="project-card">
+                    <summary class="project-summary">
+                        <div>
+                            <h3>Rover Sensor Mast Design</h3>
+                            <p>Designed, simulated, and fabricated a custom sensor mast for field robotics testing...</p>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </summary>
+                    <div class="project-details-content" onclick="event.stopPropagation()">
+                        <div class="project-section-block">
+                            <h4>The Problem</h4>
+                            <p>Describe the specific constraint or engineering challenge...</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Approach &amp; Methodology</h4>
+                            <p>Detail how you went about solving it...</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Results &amp; Impact</h4>
+                            <p>Share final performance metrics or field test outcomes...</p>
+                        </div>
+                        <div class="project-photo-grid">
+                            <div class="photo-card" data-src="images/placeholder_1.jpg" data-description="FEA stress concentration analysis">
+                                <img src="images/placeholder_1.jpg" alt="Project photo 1" loading="lazy">
+                            </div>
+                            <div class="photo-card" data-src="images/placeholder_2.jpg" data-description="Physical prototype field testing">
+                                <img src="images/placeholder_2.jpg" alt="Project photo 2" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="project-card">
+                    <summary class="project-summary">
+                        <div>
+                            <h3>Cycloidal Gearbox</h3>
+                            <p>Engineered a compact high-ratio reduction gearbox for quadruped locomotion joints, precision-machined in the machine shop.</p>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </summary>
+                    <div class="project-details-content" onclick="event.stopPropagation()">
+                        <div class="project-section-block">
+                            <h4>The Problem</h4>
+                            <p>Describe the problem...</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Approach &amp; Methodology</h4>
+                            <p>Describe how you went about it...</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Results</h4>
+                            <p>Describe the results...</p>
+                        </div>
+                    </div>
+                </details>
             </section>
 
             <!-- Software Projects Section -->
@@ -579,43 +734,32 @@
             <!-- Photography Section -->
             <section id="photography" class="portfolio-section">
                 <h2>Photography</h2>
-                <div class="project-card">
-                    <h3>Film &amp; Travel Photography</h3>
-                    <p>A collection of analog photography capturing landscapes, long-distance bike touring, and atmospheric moments.</p>
+                <p class="photo-blurb">
+                    A collection of analog photography capturing landscapes, long-distance bike touring, and atmospheric moments. This gallery shuffles a selection of frames on every visit.
+                </p>
+                <div class="photo-grid" id="photoGrid">
+                    <!-- Randomly populated via JavaScript -->
                 </div>
             </section>
 
         </main>
     </div>
 
-    <!-- JavaScript for Shrinking Header, Scroll Spy, & Theme Toggle -->
+    <!-- Lightbox Modal Overlay -->
+    <div id="lightbox" class="lightbox-overlay">
+        <img id="lightboxImg" class="lightbox-content" src="" alt="Enlarged Photo">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <!-- Include external photo pool data -->
+    <script src="photos.js"></script>
+
+    <!-- JavaScript for Scroll Spy, Theme Toggle, Random Photo Shuffler, & Lightbox -->
     <script>
-        // 1. Shrink/Sticky Hero Header on Scroll
-        window.addEventListener('scroll', () => {
-            const heroHeader = document.getElementById('heroHeader');
-            if (window.scrollY > 40) {
-                heroHeader.classList.add('scrolled');
-            } else {
-                heroHeader.classList.remove('scrolled');
-            }
-        });
-
-        // 2. Force 'About' Link to Scroll to Absolute Top
-        document.querySelectorAll('a[href="#about"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                history.pushState(null, null, '#about');
-            });
-        });
-
-        // 3. Scroll Spy to Update Active Nav Link
-        const sections = document.querySelectorAll('.portfolio-section');
         const navLinks = document.querySelectorAll('.horizontal-nav a, .nav-brand');
+        const sections = document.querySelectorAll('.hero-section, .portfolio-section');
 
+        // Intersection Observer for Scroll Spy
         const observerOptions = {
             root: null,
             rootMargin: '-20% 0px -60% 0px',
@@ -639,17 +783,7 @@
 
         sections.forEach(section => observer.observe(section));
 
-        // Handle 'About' active state when scrolled to the very top
-        window.addEventListener('scroll', () => {
-            const aboutLinks = document.querySelectorAll('a[href="#about"]');
-            if (window.scrollY < 200) {
-                aboutLinks.forEach(l => l.classList.add('active'));
-            } else {
-                aboutLinks.forEach(l => l.classList.remove('active'));
-            }
-        });
-
-        // 4. Dark/Light Mode Toggle Switcher
+        // Dark/Light Mode Toggle Switcher
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
@@ -658,6 +792,58 @@
             } else {
                 themeToggle.textContent = '🌙';
             }
+        });
+
+        // ==========================================
+        // PHOTOGRAPHY GALLERY POPULATOR & LIGHTBOX
+        // ==========================================
+        function loadRandomPhotos() {
+            const grid = document.getElementById('photoGrid');
+            if (!grid || typeof photoPool === 'undefined') return;
+
+            const shuffled = [...photoPool].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 9);
+
+            grid.innerHTML = selected.map(photo => {
+                const filename = photo.src.split('/').pop();
+                return `
+                    <div class="photo-card" data-src="${photo.src}" data-description="${photo.description}">
+                        <img src="${photo.src}" alt="${filename}" loading="lazy">
+                    </div>
+                `;
+            }).join('');
+        }
+
+        loadRandomPhotos();
+
+        // ==========================================
+        // LIGHTBOX FUNCTIONALITY (Global Delegation)
+        // ==========================================
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        document.addEventListener('click', (e) => {
+            // Do not open new photos if the lightbox is already active
+            if (lightbox.classList.contains('active')) return;
+
+            const card = e.target.closest('.photo-card');
+            if (!card) return;
+
+            const imgSrc = card.getAttribute('data-src');
+            const imgDescription = card.getAttribute('data-description');
+
+            if (!imgSrc) return;
+
+            lightboxImg.src = imgSrc;
+            lightboxCaption.textContent = imgDescription || '';
+            lightbox.classList.add('active');
+            document.body.classList.add('lightbox-open'); // Disable scrolling
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-open'); // Re-enable scrolling
         });
     </script>
 

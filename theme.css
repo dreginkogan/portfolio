@@ -1,0 +1,37 @@
+/* ==========================================
+   EVERFOREST THEME CONFIGURATION (Light/Dark)
+   ========================================== */
+:root {
+    /* Everforest Light (Medium) Palette */
+    --bg-color-top: #f4f0be;          /* bg1 - Nav & Hero background color */
+    --bg-color-scroll: #fdf6e3;       /* bg0 - General background / card tint */
+    --white-block-bg: #efebd4;        /* bg2 - Main content block background */
+    --text-primary: #5c6a72;          /* fg */
+    --text-secondary: #829181;        /* grey */
+    --text-light: #5c6a72;
+    --accent-color: #8da101;          /* green (Theme accent & active link color) */
+    --border-color: #dfdac7;          /* bg4 */
+    --border-radius: 12px;
+    --content-width: 1000px;          /* Centered content width */
+    --transition-speed: 0.3s ease;
+    
+    /* Nav Text Colors */
+    --nav-text-color: #5c6a72;        
+    --nav-link-opacity: 0.85;
+}
+
+/* Everforest Dark (Medium) Mode Color Overrides */
+body.dark-mode {
+    --bg-color-top: #232a2e;          /* bg_dim - Dark mode nav & hero background color */
+    --bg-color-scroll: #272e33;       /* bg0 */
+    --white-block-bg: #2d353b;        /* bg1 */
+    --text-primary: #d3c6aa;          /* fg */
+    --text-secondary: #859289;        /* grey */
+    --text-light: #d3c6aa;
+    --accent-color: #a7c080;          /* green */
+    --border-color: #475258;          /* bg4 */
+    
+    /* Nav Text Colors */
+    --nav-text-color: #d3c6aa;
+    --nav-link-opacity: 0.85;
+}
