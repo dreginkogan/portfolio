@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Landing Page</title>
+    <style>
+        /* ==========================================
+           THEME & COLOR CONFIGURATION (Light/Dark)
+           ========================================== */
+        :root {
+            --bg-color-top: #0f172a;          /* Hero fallback color */
+            --bg-color-scroll: #f8fafc;       /* General background / card tint */
+            --white-block-bg: #ffffff;        /* Main content block background */
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #ffffff;
+            --accent-color: #2563eb;          /* Theme accent & active link color */
+            --border-color: #e2e8f0;
+            --border-radius: 12px;
+            --content-width: 1000px;          /* Centered content width */
+            --transition-speed: 0.3s ease;
+            
+            /* Light Mode Parallax Background Photo */
+            --parallax-bg: none;              /* Replace with: url('images/light-hero-photo.jpg') */
+            
+            /* Light Mode Scrolled Nav Colors (High Contrast) */
+            --nav-scrolled-bg: #ffffff;       /* Solid white */
+            --nav-text-color: #ffffff;        /* White text over hero photo */
+            --nav-scrolled-text: #000000;     /* Pure black text when scrolled in light mode */
+            --nav-link-opacity: 1;
+        }
+
+        /* Dark Mode Color Overrides & Dark Mode Parallax Photo */
+        body.dark-mode {
+            --bg-color-scroll: #0b0f19;
+            --white-block-bg: #111827;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --border-color: #1f2937;
+            
+            /* Dark Mode Parallax Background Photo */
+            --parallax-bg: none;              /* Replace with: url('images/dark-hero-photo.jpg') */
+            
+            /* Dark Mode Scrolled Nav Colors (High Contrast) */
+            --nav-scrolled-bg: #000000;       /* Solid black */
+            --nav-text-color: #ffffff;
+            --nav-scrolled-text: #ffffff;     /* Pure white text when scrolled in dark mode */
+        }
+
+        /* Enable smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color-scroll);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        /* ==========================================
+           COLLAPSIBLE STICKY HERO & HORIZONTAL NAV
+           ========================================== */
+        .hero-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 480px;                    /* Full height at top of page */
+            background-color: var(--bg-color-top);
+            background-image: var(--parallax-bg);
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            z-index: 1000;
+            transition: height var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        /* Dark overlay for photo background contrast */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color-top);
+            opacity: 0.88;
+            z-index: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        body.dark-mode .hero-overlay {
+            opacity: 0.92;
+        }
+
+        /* Shrink state when scrolled */
+        .hero-header.scrolled {
+            height: 70px;                     /* Slim sticky bar height */
+            background-color: var(--nav-scrolled-bg);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Navigation Container */
+        .nav-container {
+            position: relative;
+            z-index: 3;
+            max-width: var(--content-width);
+            margin: 0 auto;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            color: var(--nav-text-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .horizontal-nav {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .horizontal-nav a {
+            color: var(--nav-text-color);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.92rem;
+            opacity: 0.85;
+            transition: opacity var(--transition-speed), color var(--transition-speed), font-weight var(--transition-speed);
+        }
+
+        .horizontal-nav a:hover {
+            opacity: 1;
+            color: var(--nav-text-color);
+        }
+
+        /* Active Navigation Link Highlighting */
+        .horizontal-nav a.active {
+            opacity: 1;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* When scrolled, shift nav text to high-contrast color */
+        .hero-header.scrolled .nav-brand,
+        .hero-header.scrolled .horizontal-nav a {
+            color: var(--nav-scrolled-text);
+            opacity: 1;
+        }
+
+        .hero-header.scrolled .horizontal-nav a:hover,
+        .hero-header.scrolled .horizontal-nav a.active {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        /* Dark/Light Mode Toggle Button */
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background var(--transition-speed), transform var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        body.dark-mode .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Hero Content (Headshot, Name, Subtitle) */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: var(--content-width);
+            margin: 0 auto;
+            height: calc(100% - 70px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px 40px 20px;
+            transition: opacity 0.2s ease, transform var(--transition-speed);
+        }
+
+        /* Fades out and slides up when header shrinks */
+        .hero-header.scrolled .hero-content {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-20px);
+        }
+
+        /* Headshot Photo */
+        .photo-container {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--border-color);
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder-text {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            opacity: 0.7;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            opacity: 0.85;
+            font-weight: 400;
+            max-width: 650px;
+        }
+
+        /* ==========================================
+           MAIN CONTENT CONTAINER & SECTIONS
+           ========================================== */
+        .main-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: var(--white-block-bg);
+            padding: 80px 20px 120px 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            transition: background-color var(--transition-speed);
+        }
+
+        .content-area {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Centered and Larger Portfolio Sections */
+        .portfolio-section {
+            margin-bottom: 90px;
+            scroll-margin-top: 100px; /* Accounts for sticky header height */
+            text-align: center;
+        }
+
+        .portfolio-section h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+            display: inline-block;
+            min-width: 280px;
+        }
+
+        /* ==========================================
+           SKILLS SECTION (3-Wide Grid, Circular Logos)
+           ========================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 28px;
+            text-align: center;
+        }
+
+        .skill-card {
+            background: transparent;
+            border: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .skill-logo-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--bg-color-scroll);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            overflow: hidden;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .skill-logo-placeholder {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .skill-logo-container img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .skill-category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .skill-list {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Centered & Larger Project Cards */
+        .project-card {
+            background-color: var(--bg-color-scroll);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: border-color var(--transition-speed), background-color var(--transition-speed);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .project-card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .project-card p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .horizontal-nav {
+                gap: 16px;
+                font-size: 0.85rem;
+            }
+            .nav-right-group {
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .horizontal-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body id="about">
+
+    <!-- Collapsible Sticky Hero Header with Horizontal Navigation -->
+    <header id="heroHeader" class="hero-header">
+        <div class="hero-overlay"></div>
+        
+        <!-- Navigation Bar -->
+        <div class="nav-container">
+            <a href="#about" class="nav-link nav-brand">Your Name</a>
+            <div class="nav-right-group">
+                <nav>
+                    <ul class="horizontal-nav">
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#skills" class="nav-link">Skills</a></li>
+                        <li><a href="#mechanical" class="nav-link">Mechanical</a></li>
+                        <li><a href="#software" class="nav-link">Software</a></li>
+                        <li><a href="#photography" class="nav-link">Photography</a></li>
+                    </ul>
+                </nav>
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">🌙</button>
+            </div>
+        </div>
+
+        <!-- Full-Height Hero Content (Headshot, Name, Subtitle) -->
+        <div class="hero-content">
+            <div class="photo-container">
+                <!-- Swap out for <img> later: <img src="images/your-photo.jpg" alt="Your Name"> -->
+                <div class="photo-placeholder-text">Photo Placeholder</div>
+            </div>
+            <h1>Your Name</h1>
+            <p class="subtitle">Mechanical Engineering &amp; Robotics Student | Field Robotics &amp; Additive Manufacturing</p>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <main class="content-area">
+            
+            <!-- Skills Section (3-Wide Grid, 3 Rows, Circular Logos, No Card Background) -->
+            <section id="skills" class="portfolio-section">
+                <h2>Technical Expertise &amp; Tools</h2>
+                
+                <div class="skills-grid">
+                    
+                    <!-- Row 1, Col 1 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">CAD &amp; Design</div>
+                        <div class="skill-list">SolidWorks, Fusion 360, Onshape, Blender, FEA Analysis</div>
+                    </div>
+
+                    <!-- Row 1, Col 2 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Machining Tools</div>
+                        <div class="skill-list">CNC Milling, Manual Mill, Lathe, CAM Toolpaths</div>
+                    </div>
+
+                    <!-- Row 1, Col 3 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Software &amp; Scripting</div>
+                        <div class="skill-list">Python, MATLAB, Simulink, C++, Git, Bash</div>
+                    </div>
+
+                    <!-- Row 2, Col 1 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Robotics Subfields</div>
+                        <div class="skill-list">Field Robotics, Compliant Mechanisms, Kinematics</div>
+                    </div>
+
+                    <!-- Row 2, Col 2 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Fabrication &amp; Rapid Proto</div>
+                        <div class="skill-list">3D Printing, Laser Cutting, Composite Layups, Welding</div>
+                    </div>
+
+                    <!-- Row 2, Col 3 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Electronics &amp; Hardware</div>
+                        <div class="skill-list">Raspberry Pi, Arduino, GPIO, NeoPixels, Soldering</div>
+                    </div>
+
+                    <!-- Row 3, Col 1 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Control Systems</div>
+                        <div class="skill-list">PID Tuning, State-Space Models, Bode Plots, Transfer Functions</div>
+                    </div>
+
+                    <!-- Row 3, Col 2 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Data &amp; APIs</div>
+                        <div class="skill-list">NumPy, SciPy, Pandas, Matplotlib, REST APIs</div>
+                    </div>
+
+                    <!-- Row 3, Col 3 -->
+                    <div class="skill-card">
+                        <div class="skill-logo-container">
+                            <span class="skill-logo-placeholder">Logo</span>
+                        </div>
+                        <div class="skill-category-title">Operating Systems</div>
+                        <div class="skill-list">Linux, Kubuntu, KDE Plasma, Command Line Tools</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Mechanical Projects Section -->
+            <section id="mechanical" class="portfolio-section">
+                <h2>Mechanical Projects</h2>
+                <div class="project-card">
+                    <h3>Rover Sensor Mast Design</h3>
+                    <p>Designed, simulated, and fabricated a custom sensor mast for field robotics testing, incorporating weight-saving topology and rigorous FEA validation.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Cycloidal Gearbox</h3>
+                    <p>Engineered a compact high-ratio reduction gearbox for quadruped locomotion joints, precision-machined in the machine shop.</p>
+                </div>
+            </section>
+
+            <!-- Software Projects Section -->
+            <section id="software" class="portfolio-section">
+                <h2>Software Projects</h2>
+                <div class="project-card">
+                    <h3>Real-Time Transit Mapping Tool</h3>
+                    <p>Developed custom Python scripts leveraging live public transit APIs, xmltodict, and Matplotlib to parse and visualize route locations.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Procedural Mesh Generator</h3>
+                    <p>Explored 2D planar polygon operations and procedural workflows using Blender, Sverchok, and pyclipper.</p>
+                </div>
+            </section>
+
+            <!-- Photography Section -->
+            <section id="photography" class="portfolio-section">
+                <h2>Photography</h2>
+                <div class="project-card">
+                    <h3>Film &amp; Travel Photography</h3>
+                    <p>A collection of analog photography capturing landscapes, long-distance bike touring, and atmospheric moments.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JavaScript for Shrinking Header, Scroll Spy, & Theme Toggle -->
+    <script>
+        // 1. Shrink/Sticky Hero Header on Scroll
+        window.addEventListener('scroll', () => {
+            const heroHeader = document.getElementById('heroHeader');
+            if (window.scrollY > 40) {
+                heroHeader.classList.add('scrolled');
+            } else {
+                heroHeader.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Force 'About' Link to Scroll to Absolute Top
+        document.querySelectorAll('a[href="#about"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                history.pushState(null, null, '#about');
+            });
+        });
+
+        // 3. Scroll Spy to Update Active Nav Link
+        const sections = document.querySelectorAll('.portfolio-section');
+        const navLinks = document.querySelectorAll('.horizontal-nav a, .nav-brand');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Handle 'About' active state when scrolled to the very top
+        window.addEventListener('scroll', () => {
+            const aboutLinks = document.querySelectorAll('a[href="#about"]');
+            if (window.scrollY < 200) {
+                aboutLinks.forEach(l => l.classList.add('active'));
+            } else {
+                aboutLinks.forEach(l => l.classList.remove('active'));
+            }
+        });
+
+        // 4. Dark/Light Mode Toggle Switcher
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌙';
+            }
+        });
+    </script>
+
+</body>
+</html>
