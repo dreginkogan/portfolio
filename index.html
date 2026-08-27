@@ -186,6 +186,8 @@
             max-width: 650px;
         }
 
+        
+
         /* ==========================================
            MAIN CONTENT CONTAINER & SECTIONS
            ========================================== */
@@ -263,16 +265,34 @@
             transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
 
-        .skill-logo-placeholder {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            font-weight: 600;
+        .skill-logo-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--bg-color-scroll);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            overflow: hidden;
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
 
-        .skill-logo-container img {
+        .skill-icon {
             width: 42px;
             height: 42px;
-            object-fit: contain;
+            background-color: var(--accent-color);
+            -webkit-mask-image: var(--icon);
+            mask-image: var(--icon);
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            transition: background-color var(--transition-speed);
         }
 
         .skill-category-title {
@@ -335,6 +355,27 @@
             margin: 0;
         }
 
+        .status-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-left: 10px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .status-progress {
+            background-color: rgba(141, 161, 1, 0.15); /* accent-color at low opacity */
+            color: var(--accent-color);
+        }
+
+        .status-complete {
+            background-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
         /* Optional indicator arrow that rotates when open */
         .expand-arrow {
             font-size: 0.9rem;
@@ -381,6 +422,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .project-photo-grid img {
@@ -533,9 +575,8 @@
                     <ul class="horizontal-nav">
                         <li><a href="#about" class="nav-link active">About</a></li>
                         <li><a href="#skills" class="nav-link">Skills</a></li>
-                        <li><a href="#mechanical" class="nav-link">Mechanical</a></li>
-                        <li><a href="#software" class="nav-link">Software</a></li>
-                        <li><a href="#photography" class="nav-link">Photography</a></li>
+                        <li><a href="#projects" class="nav-link">Projects</a></li>
+                        <!-- <li><a href="#photography" class="nav-link">Photography</a></li> -->
                     </ul>
                 </nav>
                 <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">☀️</button>
@@ -553,13 +594,13 @@
         
         <!-- Social Links & Resume Button Row -->
         <div class="hero-links" style="margin-top: 20px; display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/danya-kogan/" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">LinkedIn</a>
             <span style="opacity: 0.4;">•</span>
-            <a href="https://github.com/yourusername" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">GitHub</a>
+            <a href="https://github.com/dreginkogan" target="_blank" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">GitHub</a>
             <span style="opacity: 0.4;">•</span>
-            <a href="mailto:your.email@domain.com" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">Email</a>
+            <a href="mailto:dreginkogan@gmail.com" style="color: var(--text-light); text-decoration: none; font-size: 0.95rem; opacity: 0.9;">Email</a>
             <span style="opacity: 0.4;">•</span>
-            <a href="resume.pdf" target="_blank" style="background-color: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Download Resume</a>
+            <a href="Danya Kogan Resume.pdf" target="_blank" style="background-color: var(--accent-color); color: #fff; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Download Resume</a>
         </div>
     </section>
 
@@ -572,170 +613,282 @@
                 <h2>Technical Expertise &amp; Tools</h2>
                 
                 <div class="skills-grid">
-                    
-                    <!-- Row 1, Col 1 -->
+
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsSystem.svg');"></div>
                         </div>
                         <div class="skill-category-title">CAD &amp; Design</div>
-                        <div class="skill-list">SolidWorks, Fusion 360, Onshape, Blender, FEA Analysis</div>
+                        <div class="skill-list">SolidWorks, Fusion 360, Onshape, Blender, FEA Analysis, CAM Toolpaths</div>
                     </div>
 
-                    <!-- Row 1, Col 2 -->
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsSettingsOption.svg');"></div>
                         </div>
-                        <div class="skill-category-title">Machining Tools</div>
-                        <div class="skill-list">CNC Milling, Manual Mill, Lathe, CAM Toolpaths</div>
+                        <div class="skill-category-title">Fabrication</div>
+                        <div class="skill-list">CNC Mill & Lathe, Manual Mill & Lathe, FDM 3D Printing (advanced), SLA/DLP Resin Printing</div>
                     </div>
 
-                    <!-- Row 1, Col 3 -->
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsCode.svg');"></div>
                         </div>
                         <div class="skill-category-title">Software &amp; Scripting</div>
                         <div class="skill-list">Python, MATLAB, C++, Git, Linux, ROS</div>
                     </div>
 
-                    <!-- Row 2, Col 1 -->
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsServices.svg');"></div>
                         </div>
-                        <div class="skill-category-title">Robotics Subfields</div>
-                        <div class="skill-list">Field Robotics, Compliant Mechanisms, Kinematics</div>
+                        <div class="skill-category-title">Robotic Mechanism Design</div>
+                        <div class="skill-list">Soft/Compliant Mechanisms, Field Robotics</div>
                     </div>
 
-                    <!-- Row 2, Col 2 -->
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
-                        </div>
-                        <div class="skill-category-title">Fabrication &amp; Rapid Proto</div>
-                        <div class="skill-list">3D Printing, Laser Cutting, Composite Layups, Welding</div>
-                    </div>
-
-                    <!-- Row 2, Col 3 -->
-                    <div class="skill-card">
-                        <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsRaspberry.svg');"></div>
                         </div>
                         <div class="skill-category-title">Electronics &amp; Hardware</div>
-                        <div class="skill-list">Raspberry Pi, Arduino, GPIO, NeoPixels, Soldering</div>
+                        <div class="skill-list">Raspberry Pi, Arduino</div>
                     </div>
 
-                    <!-- Row 3, Col 1 -->
                     <div class="skill-card">
                         <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
+                            <div class="skill-icon" style="--icon: url('icons/GrommetIconsCpu.svg');"></div>
                         </div>
                         <div class="skill-category-title">Control Systems</div>
-                        <div class="skill-list">PID Tuning, State-Space Models, Bode Plots, Transfer Functions</div>
-                    </div>
-
-                    <!-- Row 3, Col 2 -->
-                    <div class="skill-card">
-                        <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
-                        </div>
-                        <div class="skill-category-title">Data &amp; APIs</div>
-                        <div class="skill-list">NumPy, SciPy, Pandas, Matplotlib, REST APIs</div>
-                    </div>
-
-                    <!-- Row 3, Col 3 -->
-                    <div class="skill-card">
-                        <div class="skill-logo-container">
-                            <span class="skill-logo-placeholder">Logo</span>
-                        </div>
-                        <div class="skill-category-title">Operating Systems</div>
-                        <div class="skill-list">Linux, Kubuntu, KDE Plasma, Command Line Tools</div>
+                        <div class="skill-list">PID Tuning</div>
                     </div>
 
                 </div>
             </section>
 
-            <!-- Mechanical Projects Section -->
-            <section id="mechanical" class="portfolio-section">
-                <h2>Mechanical Projects</h2>
+            <!-- Projects Section -->
+            <section id="projects" class="portfolio-section">
+                <h2>Projects</h2>
                 
+                <!-- Zoe -->
                 <details class="project-card">
                     <summary class="project-summary">
                         <div>
-                            <h3>Rover Sensor Mast Design</h3>
-                            <p>Designed, simulated, and fabricated a custom sensor mast for field robotics testing...</p>
+                            <h3>Zoe 2 Field Rover — Planetary Robotics Lab, CMU <span class="status-badge status-progress">In Progress</span></h3>
+                            
+                            <div class="project-photo-grid">
+                                <div class="photo-card" data-src="project_images/zoe.gif" data-description="Zoe driving in the Robotics Institute's sand pit during a driving test">
+                                    <img src="project_images/zoe.gif" alt="Project photo 1" loading="lazy">
+                                </div>
+                                <div class="photo-card" data-src="images/placeholder_2.jpg" data-description="Solidworks screenshot of Zoe">
+                                    <img src="project_images/zoecad.png" alt="Project photo 2" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <p>Mechanical design and fabrication lead for Zoe 2, a field rover developed at CMU's Planetary Robotics Lab for autonomous astrobiology and terrain research.</p>
                         </div>
                         <span class="expand-arrow">▼</span>
                     </summary>
                     <div class="project-details-content" onclick="event.stopPropagation()">
                         <div class="project-section-block">
                             <h4>The Problem</h4>
-                            <p>Describe the specific constraint or engineering challenge...</p>
+                            <p>Field rovers often need to survive harsh, 
+                                unstructured terrain while carrying sensitive science payloads — every mechanical 
+                                component has to balance ruggedness and serviceability in the field.</p>
                         </div>
                         <div class="project-section-block">
                             <h4>Approach &amp; Methodology</h4>
-                            <p>Detail how you went about solving it...</p>
+                            <p>I currently lead the mechanical design and in-house manufacture across several rover subsystems, manufacturing components myself using CNC and manual machining tools which allows me to quickly iterate between design revisions and physical tests.
+                                <br><br>
+                               Previously, I was responsible for manufacturing components for the steering subsystem, and designed the internal electronics mounts. Since the rover's field missions will operate in the Atacama Desert, fans were ruled out to avoid pulling dust into the electronics enclosure — so I ran thermal FEA to validate that the mounts could passively dissipate heat from onboard electronics within safe operating limits.</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Current Status</h4>
+                            <p> I am currently designing and manufacturing the sensor mast, which is necessary for the rover's navigation capability during field deployment.</p>
+                        </div>
+                        
+                    </div>
+                </details>
+
+                <!-- Soft Robot -->
+                <details class="project-card">
+                    <summary class="project-summary">
+                        <div>
+                            <h3>Soft Robotic Gripper with Pneumatic Syringe-Pump Actuation</h3>
+                            
+                            <div class="project-photo-grid">
+                                <div class="photo-card" data-src="project_images/manipulator.gif" data-description="The soft gripper picking up a can of seltzer">
+                                    <img src="project_images/manipulator.gif" alt="Project photo 1" loading="lazy">
+                                </div>
+                                <div class="photo-card" data-src="project_images/pump.gif" data-description="The syringe pump actuating">
+                                    <img src="project_images/pump.gif" alt="Project photo 2" loading="lazy">
+                                </div>
+                            </div>
+                            <p>A soft robotic gripper actuated via a custom Arduino-controlled syringe pump, designed to be made from low-cost hardware accessible to hobbyists.</p>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </summary>
+                    <div class="project-details-content" onclick="event.stopPropagation()">
+                        <div class="project-section-block">
+                            <h4>The Problem</h4>
+                            <p>Soft robotic grippers typically rely on pneumatic actuation to achieve compliant, damage-tolerant grasping of irregular or delicate objects — but standard implementations depend on compressed air sources and pressure regulators that add cost, size, and complexity. I wanted a compact, self-contained actuation system that could drive soft pneumatic actuators without external air supply infrastructure.</p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Approach &amp; Methodology</h4>
+                            <p>
+                                I designed and fabricated [gripper geometry/material] to achieve compliant, damage-tolerant grasping through pressure-driven deformation. Initial testing relied on [manual syringe actuation / bench air supply — whatever you started with], which worked for proof-of-concept but offered no repeatable or programmable control over grip force and timing.
+                                <br><br>
+                                To solve this, I designed and built a custom syringe pump — [stepper motor / actuator] driven and Arduino-controlled — to precisely regulate air volume displaced into the gripper, giving me programmable control over actuation speed and grip force without relying on external compressed air infrastructure.
+                            </p>
                         </div>
                         <div class="project-section-block">
                             <h4>Results &amp; Impact</h4>
-                            <p>Share final performance metrics or field test outcomes...</p>
-                        </div>
-                        <div class="project-photo-grid">
-                            <div class="photo-card" data-src="images/placeholder_1.jpg" data-description="FEA stress concentration analysis">
-                                <img src="images/placeholder_1.jpg" alt="Project photo 1" loading="lazy">
-                            </div>
-                            <div class="photo-card" data-src="images/placeholder_2.jpg" data-description="Physical prototype field testing">
-                                <img src="images/placeholder_2.jpg" alt="Project photo 2" loading="lazy">
-                            </div>
+                            <p>The gripper successfully grasped [types of objects — e.g., "objects ranging from an egg to a wrench" is a classic soft-robotics demo pairing showing both delicate and rigid-object handling]. [Include a real metric if you have one — max object weight held, grip force achieved, actuation response time, number of grasp cycles tested, etc.]</p>
                         </div>
                     </div>
                 </details>
 
+                <!-- Gearbox -->
                 <details class="project-card">
                     <summary class="project-summary">
                         <div>
-                            <h3>Cycloidal Gearbox</h3>
-                            <p>Engineered a compact high-ratio reduction gearbox for quadruped locomotion joints, precision-machined in the machine shop.</p>
+                            <h3>Mid-Range Cycloidal Gearbox Design — CMU Robotics Club</h3>
+                            
+                            <div class="project-photo-grid">
+                                <div class="photo-card" data-src="project_images/gearbox.gif" data-description="Gif of the gearbox rotating a rubber duck">
+                                    <img src="project_images/gearbox.gif" alt="Project photo 1" loading="lazy">
+                                </div>
+                                <div class="photo-card" data-src="project_images/gearbox.png" data-description="Exploded diagram of gearbox components - made in Solidworks">
+                                    <img src="project_images/gearbox.png" alt="Project photo 2" loading="lazy">
+                                </div>
+                            </div>
+                            <p>Designed and fabricated a low-backlash cycloidal gearbox targeting a gap between expensive industrial cycloidal drives and low-torque 3D-printed hobbyist designs.</p>
                         </div>
                         <span class="expand-arrow">▼</span>
                     </summary>
                     <div class="project-details-content" onclick="event.stopPropagation()">
                         <div class="project-section-block">
                             <h4>The Problem</h4>
-                            <p>Describe the problem...</p>
+                            <p>Commercially available cycloidal gearboxes offer excellent backlash and torque density but are priced and engineered for industrial use, putting them out of reach for student teams and labs. Hobbyist 3D-printed cycloidal designs fill the low end, but lack the torque capacity and durability that some specific projects may need. 
+                                I set out to design a cycloidal gearbox for that gap: mid-range torque and durability, manufacturable with standard makerspace tools, at a fraction of industrial cost.</p>
                         </div>
                         <div class="project-section-block">
                             <h4>Approach &amp; Methodology</h4>
-                            <p>Describe how you went about it...</p>
+                            <p>I designed the gearbox in SolidWorks, targeting a 14:1 reduction capable of 3.3 Nm input / 56 Nm output torque. I laser-cut most of the parts from high-strength acetal and then stacked and bonded them. 
+                                The main body and cycloidal gears required additional fabrication using a drill press with a ball end mill to cut hemispherical recesses for ball bearings balls. I machined the wall pins, load pins, and eccentric shaft from 4140 steel on a manual lathe; the eccentric shaft's off-center features required custom aluminum jigs, which I machined on the mill, to hold it accurately on the lathe, plus additional milling to cut its rectangular input profile.
+                                <br><br>
+                                For testing, I designed and built the physical test rigs — a bracket holding the motor and gearbox for dynamic testing in a mill vise, and a robot-leg test rig secured with ratchet straps for static load testing against a scale. Teammates handled the ODrive motor control software and the Python data-collection scripts used to extract torque and velocity data from these rigs.</p>
                         </div>
                         <div class="project-section-block">
-                            <h4>Results</h4>
-                            <p>Describe the results...</p>
+                            <h4>Results &amp; Impact</h4>
+                            <p>Dynamic testing data ended up unreliable, likely due to the motor bracket over-constraining the motor and misaligning the ODrive's encoder magnets. I'm no longer working on this project — the CMU Robotics Club is continuing development, including redesigning the motor bracket, running FEA to guide reinforcement/mass reduction, and using the gearbox's eventual efficiency data in Gazebo simulations for the quadruped robot's walking controller.</p>
+                        </div>
+                        
+                    </div>
+                </details>
+
+                <!-- Zine Folder -->
+                <details class="project-card">
+                    <summary class="project-summary">
+                        <div>
+                            <h3>Zine Folding &amp; Stapling Assist Tool <span class="status-badge status-progress">In Progress</span></h3>
+                            
+                            <div class="project-photo-grid">
+                                <div class="photo-card" data-src="project_images/foldercad.png" data-description="Screenshot of my assembly in Onshape">
+                                    <img src="project_images/foldercad.png" alt="Project photo 1" loading="lazy">
+                                </div>
+                                <div class="photo-card" data-src="project_images/stapler.png" data-description="Physical Assembly">
+                                    <img src="project_images/stapler.png"Project photo 2" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <p>A semi-automated tool that speeds up zine assembly by mechanically assisting stapling and folding, reducing the time and repetitive strain of hand-assembling zines in volume.</p>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </summary>
+                    <div class="project-details-content" onclick="event.stopPropagation()">
+                    
+                        <div class="project-section-block">
+                            <h4>The Problem</h4>
+                            <p>In my social circles, a lot of people like to make zines — self-published booklets on a variety of topics. One of the most tedious parts of the process is printing, stapling, and folding them. Machines that automate this already exist for bookbinding and magazine publications — why not for zines too? I'd previously attempted a similar folding mechanism for a campus publication, using a buckle-folding mechanism that had an unacceptably high failure rate during testing.
+                                </p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Approach &amp; Methodology</h4>
+                            <p>My failiure with the previous attempt at making a publication-folding made me decide on a knife-folding mechanism right off the bat.
+                                <br><br>
+                                
+                                The buckle-folder's failure led me to choose a knife-folding mechanism from the outset this time. In knife folding, pages lie flat and a wedge presses down into a slot, where rollers grab and pull the pages through, creasing the fold — as opposed to buckle folding, which replaces the "knife" with the paper itself buckling under compression. Before the knife descends, a stapler head presses down to staple the pages together, and a guide holds the pages against a fixed edge to keep results consistent from run to run.
+                                <br><br>
+                                Components were manufactured using 3D printing, laser-cutting, and hand tools (drill). I designed the folder around materials and tools a hobbyist would realistically have at home, since I'm planning to release the design open-source and want to make it accessible.</p>
+                                                
+                            </div>
+                        <div class="project-section-block">
+                            <h4>Current Status</h4>
+                            <p>I recently completed a first full test run, which revealed the stapler was slightly wobbly — causing staples to bind sheets inconsistently, and occasionally fail to punch through entirely. Feedback from friends who tested the tool also highlighted awkwardness in loading pages. My next steps focus on fixing both issues.
+                                <br><br>
+                                Once the rate of failiure is within an acceptable margin and user experience is improved, 
+                                I will make the files and assembly instructions open-source via GitHub.
+                            </p>
                         </div>
                     </div>
                 </details>
-            </section>
 
-            <!-- Software Projects Section -->
-            <section id="software" class="portfolio-section">
-                <h2>Software Projects</h2>
-                <div class="project-card">
-                    <h3>Real-Time Transit Mapping Tool</h3>
-                    <p>Developed custom Python scripts leveraging live public transit APIs, xmltodict, and Matplotlib to parse and visualize route locations.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Procedural Mesh Generator</h3>
-                    <p>Explored 2D planar polygon operations and procedural workflows using Blender, Sverchok, and pyclipper.</p>
-                </div>
+                <!-- Map -->
+                <details class="project-card">
+                    <summary class="project-summary">
+                        <div>
+                            <h3>Real-Time Transit Map <span class="status-badge status-progress">In Progress</span></h3>                            
+                            
+                            <div class="project-photo-grid">
+                                <div class="photo-card" data-src="project_images/busmap.png" data-description="Bus map with all the leds turned on">
+                                    <img src="project_images/busmap.png" alt="Project photo 1" loading="lazy">
+                                </div>
+                                <div class="photo-card" data-src="project_images/mapblender.png" data-description="Screenshot of the map Blender model">
+                                    <img src="project_images/mapblender.png" alt="Project photo 2" loading="lazy">
+                                </div>
+                            </div>
+                            <p>A 450×450mm 3D-printed physical map of my neighborhood that displays real-time bus locations and arrival estimates using backlit translucent road segments and 7-segment displays, driven by live transit API data.</p>
+                        </div>
+                        <span class="expand-arrow">▼</span>
+                    </summary>
+                    <div class="project-details-content" onclick="event.stopPropagation()">
+
+                        <div class="project-section-block">
+                            <h4>The Problem</h4>
+                            <p> 
+                            I don't like to check my phone to keep track of when my bus will arrive. Hence I decided to build a very cool-looking 3D map which displays the real-time locations of the busses, as well as time-estimates for their arrivals (using the same data source as the apps).
+                            </p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Approach &amp; Methodology</h4>
+                            <p>
+                                I used an onliine tool to convert GIS data into a 3D-model of my neighborhood complete with roads, 3D buildings, and terrain. In order to make the model printable, I had to modify the mesh using Blender, and added features necessary for holding electronic components using Onshape.
+
+                                I used a multi-color 3D printer to print sections of the map, rather than whole, as the build volume of the printer did not allow such big parts. The road segments used by the 5 bus lines I will track I printed separately using translucent PETG, such that LED strips mounted underneath could shine through to indicate bus positions.
+                            
+                                <br><br>
+                                To pull API data from Pittsburgh's transit agency and to illuminate LEDs, I am using a Raspberry Pi. I mounted the LED strips to 3D-printed guides just under the PETG roads of the map.
+                            </p>
+                        </div>
+                        <div class="project-section-block">
+                            <h4>Current Status</h4>
+                            <p>
+                                The physical map and backlit road segments are built. I'm currently developing the software to convert real-time bus GPS data from the transit API into LED position updates, and I next plan to integrate the 7-segment arrival-time displays.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </details>
+
             </section>
 
             <!-- Photography Section -->
             <section id="photography" class="portfolio-section">
                 <h2>Photography</h2>
                 <p class="photo-blurb">
-                    A collection of analog photography capturing landscapes, long-distance bike touring, and atmospheric moments. This gallery shuffles a selection of frames on every visit.
+                    You made it to the bottom of my website! If you'd be so inclined, I implore you to check out my film photography! 
+                    The photos can be enlarged by being clicked on, and information about each photo will be displayed. 
+                    Reload to reshuffle which photos get shown.
                 </p>
                 <div class="photo-grid" id="photoGrid">
                     <!-- Randomly populated via JavaScript -->
@@ -792,6 +945,15 @@
             } else {
                 themeToggle.textContent = '🌙';
             }
+        });
+
+        // ==========================================
+        // PREVENT PROJECT PHOTO CLICKS FROM TOGGLING THE DETAILS DROPDOWN
+        // ==========================================
+        document.querySelectorAll('.project-summary .project-photo-grid').forEach(grid => {
+            grid.addEventListener('click', (e) => {
+                e.preventDefault();
+            });
         });
 
         // ==========================================
