@@ -587,7 +587,7 @@
     <!-- Hero Section (Page Content with Headshot) -->
     <section id="about" class="hero-section">
         <div class="photo-container">
-            <div class="photo-placeholder-text">Photo Placeholder</div>
+            <img src="headshot.png" alt="Danya Kogan">
         </div>
         <h1>Danya Kogan</h1>
         <p class="subtitle">Senior Mechanical Engineering, Robotics, &amp; Anthropology <br>Student @ Carnegie Mellon University</p>
@@ -679,7 +679,7 @@
                                 <div class="photo-card" data-src="project_images/zoe.gif" data-description="Zoe driving in the Robotics Institute's sand pit during a driving test">
                                     <img src="project_images/zoe.gif" alt="Project photo 1" loading="lazy">
                                 </div>
-                                <div class="photo-card" data-src="images/placeholder_2.jpg" data-description="Solidworks screenshot of Zoe">
+                                <div class="photo-card" data-src="project_images/zoecad.png" data-description="Solidworks screenshot of Zoe">
                                     <img src="project_images/zoecad.png" alt="Project photo 2" loading="lazy">
                                 </div>
                             </div>
@@ -730,19 +730,21 @@
                     <div class="project-details-content" onclick="event.stopPropagation()">
                         <div class="project-section-block">
                             <h4>The Problem</h4>
-                            <p>Soft robotic grippers typically rely on pneumatic actuation to achieve compliant, damage-tolerant grasping of irregular or delicate objects — but standard implementations depend on compressed air sources and pressure regulators that add cost, size, and complexity. I wanted a compact, self-contained actuation system that could drive soft pneumatic actuators without external air supply infrastructure.</p>
+                            <p> I think soft robotics is a very interesting field and wanted to build my own soft actuators.</p>
                         </div>
                         <div class="project-section-block">
                             <h4>Approach &amp; Methodology</h4>
                             <p>
-                                I designed and fabricated [gripper geometry/material] to achieve compliant, damage-tolerant grasping through pressure-driven deformation. Initial testing relied on [manual syringe actuation / bench air supply — whatever you started with], which worked for proof-of-concept but offered no repeatable or programmable control over grip force and timing.
+                                I designed and fabricated 3D-printable molds in which I casted silicone to create pneumatically actuated soft fingers. The molds took many iterations to get right, as I experimented with different materials and fabrication methods. 
+                                
+                                To actuate my soft fingers, I used a syringe to manually inflate them. While this showed off my proof-of-concept, this offered no repeatable or programmable control over grip force and timing.
                                 <br><br>
-                                To solve this, I designed and built a custom syringe pump — [stepper motor / actuator] driven and Arduino-controlled — to precisely regulate air volume displaced into the gripper, giving me programmable control over actuation speed and grip force without relying on external compressed air infrastructure.
+                                To solve this, I designed and built a custom Arduino-controlled, stepper motor-driven, syringe pump. 
                             </p>
                         </div>
                         <div class="project-section-block">
                             <h4>Results &amp; Impact</h4>
-                            <p>The gripper successfully grasped [types of objects — e.g., "objects ranging from an egg to a wrench" is a classic soft-robotics demo pairing showing both delicate and rigid-object handling]. [Include a real metric if you have one — max object weight held, grip force achieved, actuation response time, number of grasp cycles tested, etc.]</p>
+                            <p>The gripper successfully grasped cans of seltzer, and tools such as hammers and wrenches.</p>
                         </div>
                     </div>
                 </details>

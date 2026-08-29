@@ -35,19 +35,19 @@ const photoPool = [
     },
     { 
         src: "images/london_train.jpg", 
-        description: "Description..."
+        description: "I think trains are cook."
     },
     { 
         src: "images/snowy_campus.jpg", 
-        description: "Description..."
+        description: "It snows sometimes."
     },
     { 
         src: "images/subway.jpg", 
-        description: "Description..."
+        description: "I go back to new york quite often."
     },
     { 
         src: "images/tractor.jpg", 
-        description: "Description..."
+        description: "Even though this tractor lies abandoned in a field, it shows that there was once human life and activity here which shaped the environment."
     },
     { 
         src: "images/water_tower.jpg", 
